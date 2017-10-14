@@ -1,0 +1,40 @@
+{
+  "name": "@jonstuebe/scraper",
+  "version": "0.1.0",
+  "description": "website scraper",
+  "main": "lib/index.js",
+  "files": [
+    "lib/*"
+  ],
+  "homepage": "https://github.com/jonstuebe/scraper#readme",
+  "author": "Jon Stuebe <jstuebe@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonstuebe/scraper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jonstuebe/scraper/issues"
+  },
+  "keywords": [
+    "nodejs",
+    "scraper"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "babel -d lib/ src/",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.4",
+    "puppeteer": "^0.12.0",
+    "striptags": "^3.1.0",
+    "url-parse": "^1.0.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0"
+  }
+}
