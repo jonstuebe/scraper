@@ -1,7 +1,7 @@
 # Scraper
 Node.js based scraper using headless chrome
 
-[![version](https://img.shields.io/npm/v/@jonstuebe/scraper.svg?style=flat-square)](https://www.npmjs.com/package/@jonstuebe/scraper)[![dependecies](https://david-dm.org/jonstuebe/scraper.svg)](https://www.npmjs.com/package/@jonstuebe/scraper)[![build](https://travis-ci.org/jonstuebe/scraper.svg?branch=master)](https://www.npmjs.com/package/@jonstuebe/scraper)
+[![version](https://img.shields.io/npm/v/@jonstuebe/scraper.svg?style=flat-square)](https://www.npmjs.com/package/@jonstuebe/scraper) [![dependecies](https://david-dm.org/jonstuebe/scraper.svg)](https://www.npmjs.com/package/@jonstuebe/scraper) [![build](https://travis-ci.org/jonstuebe/scraper.svg?branch=master)](https://www.npmjs.com/package/@jonstuebe/scraper)
 
 ## Installation
 
@@ -20,7 +20,7 @@ Simply require the package and initialize with a url and pass a callback functio
 
 #### es5
 ```js
-const Scraper = require("scraper").default;
+const Scraper = require("@jonstuebe/scraper").default;
 
 // run inside of an async function
 (async () => {
@@ -31,7 +31,7 @@ const Scraper = require("scraper").default;
 
 #### es6
 ```js
-import Scraper from "scraper";
+import Scraper from "@jonstuebe/scraper";
 
 // run inside of an async function
 (async () => {
@@ -42,7 +42,7 @@ import Scraper from "scraper";
 
 #### with promises
 ```js
-import Scraper from "scraper";
+import Scraper from "@jonstuebe/scraper";
 
 Scraper('http://www.amazon.com/gp/product/B00X4WHP5E/').then(data => {
   console.log(data)

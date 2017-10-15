@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "description": "website scraper",
   "main": "lib/index.js",
-  "files": [
-    "lib/*"
-  ],
+  "files": ["lib/*"],
   "homepage": "https://github.com/jonstuebe/scraper#readme",
   "author": "Jon Stuebe <jstuebe@gmail.com>",
   "repository": {
@@ -15,10 +13,10 @@
   "bugs": {
     "url": "https://github.com/jonstuebe/scraper/issues"
   },
-  "keywords": [
-    "nodejs",
-    "scraper"
-  ],
+  "engines": {
+    "node": "8.6.0"
+  },
+  "keywords": ["nodejs", "scraper"],
   "license": "MIT",
   "scripts": {
     "build": "babel -d lib/ src/",
@@ -33,8 +31,8 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.26.0"
+    "babel-preset-env": "^1.6.0"
   }
 }
