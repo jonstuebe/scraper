@@ -20,11 +20,11 @@ Simply require the package and initialize with a url and pass a callback functio
 
 #### es5
 ```js
-const Scraper = require("@jonstuebe/scraper").default;
+const Scraper = require("@jonstuebe/scraper");
 
 // run inside of an async function
 (async () => {
-  const data = await Scraper("http://www.amazon.com/gp/product/B00X4WHP5E/");
+  const data = await Scraper.scrapeAndDetect("http://www.amazon.com/gp/product/B00X4WHP5E/");
   console.log(data);
 })();
 ```
@@ -47,6 +47,43 @@ import Scraper from "@jonstuebe/scraper";
 Scraper('http://www.amazon.com/gp/product/B00X4WHP5E/').then(data => {
   console.log(data)
 });
+```
+
+#### custom scrapers
+
+```js
+const Scraper = require("@jonstuebe/scraper");
+
+(async () => {
+  const site = {
+    name: "npm",
+    hosts: ["www.npmjs.com"],
+    scrape: async page => {
+      const name = await Scraper.getText("div.content-column > h1 > a", page);
+      const version = await Scraper.getText(
+        "div.sidebar > ul:nth-child(2) > li:nth-child(2) > strong",
+        page
+      );
+      const author = await Scraper.getText(
+        "div.sidebar > ul:nth-child(2) > li.last-publisher > a > span",
+        page
+      );
+
+      return {
+        name,
+        version,
+        author
+      };
+    }
+  };
+
+  const data = await Scraper.scrape(
+    "https://www.npmjs.com/package/lodash",
+    site
+  );
+  console.log(data);
+})();
+
 ```
 
 ## Todos
