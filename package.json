@@ -1,9 +1,11 @@
 {
   "name": "@jonstuebe/scraper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "website scraper",
   "main": "lib/index.js",
-  "files": ["lib/*"],
+  "files": [
+    "lib/*"
+  ],
   "homepage": "https://github.com/jonstuebe/scraper#readme",
   "author": "Jon Stuebe <jstuebe@gmail.com>",
   "repository": {
@@ -16,7 +18,10 @@
   "engines": {
     "node": "8.6.0"
   },
-  "keywords": ["nodejs", "scraper"],
+  "keywords": [
+    "nodejs",
+    "scraper"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "babel -d lib/ src/",
