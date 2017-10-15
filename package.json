@@ -25,7 +25,8 @@
   "license": "MIT",
   "scripts": {
     "build": "babel -d lib/ src/",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "jest"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
@@ -39,6 +40,8 @@
     "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.26.0"
+    "babel-register": "^6.26.0",
+    "jest": "^21.2.1",
+    "yup": "^0.23.0"
   }
 }
