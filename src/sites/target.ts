@@ -1,8 +1,9 @@
-import { stripAndTrim, lookupFailure, getText, getSrc } from "../helpers";
+import { Page } from "puppeteer";
+import { getText, getSrc } from "../helpers";
 
 export const name = "target";
 export const hosts = ["www.target.com"];
-export const scrape = async page => {
+export const scrape = async (page: Page) => {
   const title = await getText('[data-test="product-title"]', page);
   const price = await getText('[data-test="product-price"]', page);
   const image = await getSrc('[data-test="carousel-image"] img', page);
@@ -15,7 +16,7 @@ export const scrape = async page => {
     title,
     price,
     image,
-    description
+    description,
   };
 
   return data;

@@ -23,13 +23,11 @@ Simply require the package and initialize with a url and pass a callback functio
 #### es5
 
 ```js
-const Scraper = require("@jonstuebe/scraper");
+const Scraper = require('@jonstuebe/scraper').default;
 
 // run inside of an async function
 (async () => {
-  const data = await Scraper.scrapeAndDetect(
-    "http://www.amazon.com/gp/product/B00X4WHP5E/"
-  );
+  const data = await Scraper('http://www.amazon.com/gp/product/B00X4WHP5E/');
   console.log(data);
 })();
 ```
@@ -37,11 +35,11 @@ const Scraper = require("@jonstuebe/scraper");
 #### es6
 
 ```js
-import Scraper from "@jonstuebe/scraper";
+import Scraper from '@jonstuebe/scraper';
 
 // run inside of an async function
 (async () => {
-  const data = await Scraper("http://www.amazon.com/gp/product/B00X4WHP5E/");
+  const data = await Scraper('http://www.amazon.com/gp/product/B00X4WHP5E/');
   console.log(data);
 })();
 ```
@@ -49,9 +47,9 @@ import Scraper from "@jonstuebe/scraper";
 #### with promises
 
 ```js
-import Scraper from "@jonstuebe/scraper";
+import Scraper from '@jonstuebe/scraper';
 
-Scraper("http://www.amazon.com/gp/product/B00X4WHP5E/").then(data => {
+Scraper('http://www.amazon.com/gp/product/B00X4WHP5E/').then(data => {
   console.log(data);
 });
 ```
@@ -61,15 +59,15 @@ Scraper("http://www.amazon.com/gp/product/B00X4WHP5E/").then(data => {
 If you are going to be running the scraper a number of times in succession, it's recommended to share the same chromium instance for each sequential/parallel scrape.
 
 ```js
-import puppeteer from "puppeteer";
-import Scraper from "@jonstuebe/scraper";
+import puppeteer from 'puppeteer';
+import Scraper from '@jonstuebe/scraper';
 
 // run inside of an async function
 (async () => {
   const browser = await puppeteer.launch();
   let products = [
-    "https://www.target.com/p/corinna-angle-leg-side-table-wood-threshold-8482/-/A-53496420",
-    "https://www.target.com/p/glasgow-metal-end-table-black-project-62-8482/-/A-52343433"
+    'https://www.target.com/p/corinna-angle-leg-side-table-wood-threshold-8482/-/A-53496420',
+    'https://www.target.com/p/glasgow-metal-end-table-black-project-62-8482/-/A-52343433',
   ];
 
   let productsData = [];
@@ -89,15 +87,15 @@ import Scraper from "@jonstuebe/scraper";
 If you want to emulate a device, pass in a puppeteer device as the third agument:
 
 ```js
-import puppeteer from "puppeteer";
-import Scraper from "@jonstuebe/scraper";
+import puppeteer from 'puppeteer';
+import Scraper from '@jonstuebe/scraper';
 
 // run inside of an async function
 (async () => {
   const data = await Scraper(
-    "http://www.amazon.com/gp/product/B00X4WHP5E/",
+    'http://www.amazon.com/gp/product/B00X4WHP5E/',
     null,
-    puppeteer.devices["iPhone SE"]
+    puppeteer.devices['iPhone SE']
   );
   console.log(data);
 })();
@@ -106,33 +104,33 @@ import Scraper from "@jonstuebe/scraper";
 #### custom scrapers
 
 ```js
-const Scraper = require("@jonstuebe/scraper");
+const Scraper = require('@jonstuebe/scraper');
 
 (async () => {
   const site = {
-    name: "npm",
-    hosts: ["www.npmjs.com"],
+    name: 'npm',
+    hosts: ['www.npmjs.com'],
     scrape: async page => {
-      const name = await Scraper.getText("div.content-column > h1 > a", page);
+      const name = await Scraper.getText('div.content-column > h1 > a', page);
       const version = await Scraper.getText(
-        "div.sidebar > ul:nth-child(2) > li:nth-child(2) > strong",
+        'div.sidebar > ul:nth-child(2) > li:nth-child(2) > strong',
         page
       );
       const author = await Scraper.getText(
-        "div.sidebar > ul:nth-child(2) > li.last-publisher > a > span",
+        'div.sidebar > ul:nth-child(2) > li.last-publisher > a > span',
         page
       );
 
       return {
         name,
         version,
-        author
+        author,
       };
-    }
+    },
   };
 
   const data = await Scraper.scrape(
-    "https://www.npmjs.com/package/lodash",
+    'https://www.npmjs.com/package/lodash',
     site
   );
   console.log(data);

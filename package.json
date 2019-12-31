@@ -2,9 +2,11 @@
   "name": "@jonstuebe/scraper",
   "version": "0.2.0",
   "description": "website scraper",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "module": "dist/scraper.esm.js",
+  "typings": "dist/index.d.ts",
   "files": [
-    "lib/*"
+    "dist/*"
   ],
   "homepage": "https://github.com/jonstuebe/scraper#readme",
   "author": "Jon Stuebe <jstuebe@gmail.com>",
@@ -24,25 +26,43 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start": "babel --watch --out-dir lib/ src/",
-    "build": "babel -d lib/ src/",
-    "prepublish": "npm run build",
-    "test": "jest",
-    "test-watch": "jest --watch"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "es5"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.15",
+    "lodash-es": "^4.17.15",
     "puppeteer": "^2.0.0",
     "striptags": "^3.1.0",
     "url-parse": "^1.0.5"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-regenerator": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-register": "^6.26.0",
-    "jest": "^24.9.0"
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@types/jest": "^24.0.25",
+    "@types/lodash": "^4.14.149",
+    "@types/lodash-es": "^4.17.3",
+    "@types/puppeteer": "^2.0.0",
+    "@types/url-parse": "^1.4.3",
+    "babel-jest": "^24.9.0",
+    "husky": "^3.1.0",
+    "tsdx": "^0.12.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.4"
   }
 }
