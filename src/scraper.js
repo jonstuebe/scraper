@@ -4,12 +4,13 @@ import { map, includes } from "lodash";
 
 import sites, { scrape as defaultScrape } from "./sites";
 
-export const scrape = async (url, site) => {
-  const browser = await puppeteer.launch({
-    headless: false,
-    args: ["--headless"]
-  });
+export const scrape = async (url, site, browser, device) => {
+  let globalBrowser = browser ? true : false;
+  browser = globalBrowser ? browser : await puppeteer.launch();
   const page = await browser.newPage();
+  if (device) {
+    await page.emulate(device);
+  }
   await page.goto(url, { waitUntil: "load", timeout: 0 });
 
   let data;
@@ -18,7 +19,9 @@ export const scrape = async (url, site) => {
   } else {
     data = await site.scrape(page);
   }
-  await browser.close();
+  if (!globalBrowser) {
+    await browser.close();
+  }
   return data;
 };
 
@@ -38,7 +41,9 @@ export const detectSite = async url => {
   return site;
 };
 
-export default async url => {
+export default async (url, browser, device) => {
   const site = await detectSite(url);
-  return site ? await scrape(url, site) : await scrape(url);
+  return site
+    ? await scrape(url, site, browser, device)
+    : await scrape(url, null, browser, device);
 };

@@ -19,13 +19,11 @@ export const scrape = async page => {
 };
 
 import * as amazon from "./amazon";
-import * as bestbuy from "./bestbuy";
 import * as target from "./target";
 import * as walmart from "./walmart";
 
 export default {
   amazon,
-  bestbuy,
   target,
   walmart
 };

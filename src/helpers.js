@@ -2,7 +2,11 @@ import striptags from "striptags";
 import Promise from "bluebird";
 
 export const stripAndTrim = val => {
-  return striptags(val).trim();
+  return striptags(val)
+    .replace(/\t/g, "")
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+    .replace(/(\n){1,}/g, "\n")
+    .trim();
 };
 
 export const lookupFailure = () => {

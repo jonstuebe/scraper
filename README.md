@@ -1,4 +1,5 @@
 # Scraper
+
 Node.js based scraper using headless chrome
 
 [![version](https://img.shields.io/npm/v/@jonstuebe/scraper.svg?style=flat-square)](https://www.npmjs.com/package/@jonstuebe/scraper) [![dependecies](https://david-dm.org/jonstuebe/scraper.svg)](https://www.npmjs.com/package/@jonstuebe/scraper) [![build](https://travis-ci.org/jonstuebe/scraper.svg?branch=master)](https://www.npmjs.com/package/@jonstuebe/scraper)
@@ -11,42 +12,95 @@ $ npm install @jonstuebe/scraper
 
 ## Features
 
-  * Scrape top ecommerce sites (Amazon, Walmart, Target, BestBuy)
-  * Return basic product information (title, price, image, description)
-  * Easy to use API
+- Scrape top ecommerce sites (Amazon, Walmart, Target)
+- Return basic product information (title, price, image, description)
+- Easy to use API to scrape any website
 
 ## API
+
 Simply require the package and initialize with a url and pass a callback function to receive the data.
 
 #### es5
+
 ```js
 const Scraper = require("@jonstuebe/scraper");
 
 // run inside of an async function
 (async () => {
-  const data = await Scraper.scrapeAndDetect("http://www.amazon.com/gp/product/B00X4WHP5E/");
+  const data = await Scraper.scrapeAndDetect(
+    "http://www.amazon.com/gp/product/B00X4WHP5E/"
+  );
   console.log(data);
 })();
 ```
 
 #### es6
+
 ```js
 import Scraper from "@jonstuebe/scraper";
 
 // run inside of an async function
 (async () => {
-  const data = await Scraper('http://www.amazon.com/gp/product/B00X4WHP5E/');
+  const data = await Scraper("http://www.amazon.com/gp/product/B00X4WHP5E/");
   console.log(data);
 })();
 ```
 
 #### with promises
+
 ```js
 import Scraper from "@jonstuebe/scraper";
 
-Scraper('http://www.amazon.com/gp/product/B00X4WHP5E/').then(data => {
-  console.log(data)
+Scraper("http://www.amazon.com/gp/product/B00X4WHP5E/").then(data => {
+  console.log(data);
 });
+```
+
+#### shared scraper instance
+
+If you are going to be running the scraper a number of times in succession, it's recommended to share the same chromium instance for each sequential/parallel scrape.
+
+```js
+import puppeteer from "puppeteer";
+import Scraper from "@jonstuebe/scraper";
+
+// run inside of an async function
+(async () => {
+  const browser = await puppeteer.launch();
+  let products = [
+    "https://www.target.com/p/corinna-angle-leg-side-table-wood-threshold-8482/-/A-53496420",
+    "https://www.target.com/p/glasgow-metal-end-table-black-project-62-8482/-/A-52343433"
+  ];
+
+  let productsData = [];
+  for (const product of products) {
+    const productData = await Scraper(product, browser);
+    productsData.push(productData);
+  }
+
+  await browser.close(); // make sure and close the browser otherwise the instances will continue to run in the backround on your machine
+
+  console.table(productsData);
+})();
+```
+
+#### emulate devices
+
+If you want to emulate a device, pass in a puppeteer device as the third agument:
+
+```js
+import puppeteer from "puppeteer";
+import Scraper from "@jonstuebe/scraper";
+
+// run inside of an async function
+(async () => {
+  const data = await Scraper(
+    "http://www.amazon.com/gp/product/B00X4WHP5E/",
+    null,
+    puppeteer.devices["iPhone SE"]
+  );
+  console.log(data);
+})();
 ```
 
 #### custom scrapers
@@ -83,14 +137,10 @@ const Scraper = require("@jonstuebe/scraper");
   );
   console.log(data);
 })();
-
 ```
 
-## Todos
-
-  * Need to add ability to run a test to see if markup has changed, and if so disable the store selectors and fallback to the generic scraper.
-
 ## Contributing
+
 If you want to add any sites, or just have an idea or feature, go ahead and fork [this repo](https://github.com/jonstuebe/scraper/) and send me a pull request. I'll be happy to take a look when I can and get back to you.
 
 ## Issues
@@ -99,4 +149,4 @@ For any and all issues/bugs, please post a description and code sample to reprod
 
 ## License
 
-  [MIT](LICENSE)
+[MIT](LICENSE)

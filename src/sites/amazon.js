@@ -7,9 +7,7 @@ export const scrape = async page => {
   const price = await getText("#priceblock_ourprice", page);
   const dealPrice = await getText("#priceblock_dealprice", page);
   const image = await getSrc("img.a-dynamic-image", page);
-  const description = stripAndTrim(
-    await getText("#featurebullets_feature_div", page)
-  );
+  const description = await getText("#featurebullets_feature_div", page);
 
   const data = {
     title,
