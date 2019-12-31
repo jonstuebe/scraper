@@ -16,7 +16,7 @@
     "url": "https://github.com/jonstuebe/scraper/issues"
   },
   "engines": {
-    "node": "8.6.0"
+    "node": ">=8.6.0"
   },
   "keywords": [
     "nodejs",
@@ -24,6 +24,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "start": "babel --watch --out-dir lib/ src/",
     "build": "babel -d lib/ src/",
     "prepublish": "npm run build",
     "test": "jest"
