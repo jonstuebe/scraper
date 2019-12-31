@@ -3,11 +3,11 @@ import { stripAndTrim, lookupFailure, getText, getSrc } from "../helpers";
 export const name = "target";
 export const hosts = ["www.target.com"];
 export const scrape = async page => {
-  const title = await getText(".title-product", page);
-  const price = await getText(".price .h-text-lowercase", page);
-  const image = await getSrc("img.single-image", page);
+  const title = await getText('[data-test="product-title"]', page);
+  const price = await getText('[data-test="product-price"]', page);
+  const image = await getSrc('[data-test="carousel-image"] img', page);
   const description = await getText(
-    "#tab-content-details > div:nth-child(2)",
+    "#specAndDescript:last-child > div > div",
     page
   );
 

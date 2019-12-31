@@ -27,12 +27,13 @@
     "start": "babel --watch --out-dir lib/ src/",
     "build": "babel -d lib/ src/",
     "prepublish": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
     "lodash": "^4.17.4",
-    "puppeteer": "^0.12.0",
+    "puppeteer": "^2.0.0",
     "striptags": "^3.1.0",
     "url-parse": "^1.0.5"
   },
