@@ -1,22 +1,8 @@
-import puppeteer, { Browser } from "puppeteer";
 import Scraper from "../src";
-
-let browser: Browser | undefined;
-beforeAll(async () => {
-  const options = process.env.CI
-    ? { args: ["--no-sandbox", "--disable-setuid-sandbox"] }
-    : {};
-  browser = await puppeteer.launch(options);
-});
-afterAll(async () => {
-  if (browser) {
-    await browser.close();
-  }
-});
 
 describe("test various amazon product pages", () => {
   it("adding", async () => {
-    const data = await Scraper("https://www.amazon.com/dp/B07RXXJ8YD", browser);
+    const data = await Scraper("https://www.amazon.com/dp/B07RXXJ8YD");
 
     // amazon product pages change to often to match the same data,
     // so instead we're just matching on if there is data or not
