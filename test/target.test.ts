@@ -3,7 +3,10 @@ import Scraper from "../src";
 
 let browser: Browser | undefined;
 beforeAll(async () => {
-  browser = await puppeteer.launch();
+  const options = process.env.CI
+    ? { args: ["--no-sandbox", "--disable-setuid-sandbox"] }
+    : {};
+  browser = await puppeteer.launch(options);
 });
 afterAll(async () => {
   if (browser) {
